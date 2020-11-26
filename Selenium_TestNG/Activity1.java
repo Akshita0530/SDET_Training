@@ -1,52 +1,53 @@
-package Selenium_TestNG_Activities;
+package Selenium_TestNG_xml_Activities;
 
+import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
-import junit.framework.Assert;
+import com.beust.jcommander.Parameters;
 
 import org.testng.annotations.BeforeMethod;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 
 public class Activity1 {
-	 WebDriver driver;
+	WebDriver driver;
+	WebDriverWait wait;
 	
-	@BeforeMethod
-	  public void beforeMethod() {
-        //Create a new instance of the Firefox driver
-	        driver = new FirefoxDriver();
-	        
-	        //Open browser
-	        driver.get("https://www.training-support.net");
-	  }
   @Test
-  public void example() {
-	  
-	  //Check the title of the page
-      String title = driver.getTitle();
-          
-      //Print the title of the page
-      System.out.println("Page title is: " + title);
-          
-          //Assertion for page title
-      Assert.assertEquals("Training Support", title);
-                  
-      //Find the clickable link on the page and click it
-      driver.findElement(By.tagName("a")).click();
-                  
-      //Print title of new page
-      System.out.println("New page title is: " + driver.getTitle());
-      
-      Assert.assertEquals(driver.getTitle(), "About Training Support");
-  }
+@Parameters ({"username", "password"})
   
+  public void loginTestCase(String username, String password) {
+      //Find username and pasword fields
+      WebElement usernameField = driver.findElement(By.id("username"));
+      WebElement passwordField = driver.findElement(By.id("password"));
+      
+      //Enter values
+      usernameField.sendKeys(username);
+      passwordField.sendKeys(password);
+      
+      //Click Log in
+      driver.findElement(By.cssSelector("button[type='submit']")).click();
+      
+      //Assert Message
+      String loginMessage = driver.findElement(By.id("action-confirmation")).getText();
+      AssertJUnit.assertEquals(loginMessage, "Welcome Back, admin");}
+  @BeforeMethod
+  public void beforeMethod() {
+	  driver = new FirefoxDriver();
+      wait = new WebDriverWait(driver, 10);
+      
+      //Open browser
+      driver.get("https://www.training-support.net/selenium/login-form");
+  }
 
   @AfterMethod
   public void afterMethod() {
-	//Close the browser
-      driver.quit();
+	//Close browser
+      driver.close();
   }
 
 }
