@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="false" name="Suite">
+  <test name="Test">
+    <classes>
+      <class name="Appium_Project_activities.Activity1_1GoogleTasks"/>
+      <class name="Appium_Project_activities.Activity1_2GoogleKeep"/>
+      <class name="Appium_Project_activities.Activity1_3GoogleKeep"/>
+      <class name="Appium_Project_activities.Activity2_1Chrome"/>
+      <class name="Appium_Project_activities.Activity2_1_1Login"/>
+      <class name="Appium_Project_activities.Activity2_1_2LoginIncorrect"/>
+      <class name="Appium_Project_activities.Activity2_2_1PopUp"/>
+      <class name="Appium_Project_activities.Activity2_2_2PopUpIncorrect"/>
+      
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
